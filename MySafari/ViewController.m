@@ -7,6 +7,10 @@
 //
 
 #import "ViewController.h"
+typedef NS_ENUM(NSInteger, ScrollDirection){
+    ScrollDirectionUp,
+    ScrollDirectionDown,
+};
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
@@ -15,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *forwardButton;
 
 @property (nonatomic, assign) CGFloat lastContentOffset;
+@property (nonatomic, assign) ScrollDirection scrollDirection;
 
 @end
 
@@ -35,7 +40,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-
+    
     NSString *urlString = [NSString stringWithFormat:@"http://%@",[textField text]];
     NSURL *url = [[NSURL alloc]initWithString:urlString];
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
@@ -49,19 +54,28 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+   
     if (self.lastContentOffset > scrollView.contentOffset.y) {
         //Scroll down
-        NSLog(@"down");
-        self.myURLTextField.hidden = NO;
-        self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, 414);
+        self.scrollDirection = ScrollDirectionDown;
+        
     } else if (self.lastContentOffset < scrollView.contentOffset.y){
         //Scoll up
-        NSLog(@"up");
-        self.myURLTextField.hidden = YES;
-        self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, 510);
-      
+        self.scrollDirection = ScrollDirectionUp;
     }
+    
     self.lastContentOffset = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (self.scrollDirection == ScrollDirectionDown){
+        self.myURLTextField.hidden = NO;
+        self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 58);
+    } else if (self.scrollDirection == ScrollDirectionUp){
+        self.myURLTextField.hidden = YES;
+        self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
