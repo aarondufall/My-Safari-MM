@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 
 @property (nonatomic, assign) CGFloat lastContentOffset;
 @property (nonatomic, assign) ScrollDirection scrollDirection;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
 
@@ -71,15 +72,18 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 {
     if (self.scrollDirection == ScrollDirectionDown){
         self.myURLTextField.hidden = NO;
+        self.titleLabel.hidden = NO;
         self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 58);
     } else if (self.scrollDirection == ScrollDirectionUp){
         self.myURLTextField.hidden = YES;
+        self.titleLabel.hidden = YES;
         self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    self.titleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     if ([webView canGoBack]){
         self.backButton.enabled = YES;
     } else {

@@ -105,6 +105,7 @@
                         <outlet property="forwardButton" destination="gWl-aI-eHs" id="oBr-5x-GGU"/>
                         <outlet property="myURLTextField" destination="B6j-AF-K6h" id="ctK-1I-a5o"/>
                         <outlet property="myWebView" destination="Dbi-I3-eJY" id="wxg-3t-Cjd"/>
+                        <outlet property="titleLabel" destination="pzb-8P-W3i" id="M6m-vz-DkK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
