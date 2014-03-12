@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UIWebViewDelegate, UITextFieldDelegate>
+@interface ViewController : UIViewController <UIWebViewDelegate, UITextFieldDelegate, UIScrollViewDelegate>
 
 @end
