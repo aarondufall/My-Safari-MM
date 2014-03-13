@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 @property (nonatomic, assign) ScrollDirection scrollDirection;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *pageLoadIndicatorView;
+@property (weak, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @end
 
@@ -58,7 +60,8 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
     return YES;
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+
 {
    
     if (self.lastContentOffset > scrollView.contentOffset.y) {
@@ -77,15 +80,15 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 {
     if (self.scrollDirection == ScrollDirectionDown){
         [UIView animateWithDuration:0.4 animations:^{
-            self.myURLTextField.frame = CGRectMake(20, 50, 280, 30);
-            self.titleLabel.frame = CGRectMake(20, 28, 280, 21);
-            self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 58);
+            self.headerView.frame = CGRectMake(0, 0, 320, 96);
+            self.navView.frame = CGRectMake(20, 518, 280, 30);
+            self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 154);
         }];
     } else if (self.scrollDirection == ScrollDirectionUp){
         [UIView animateWithDuration:0.4 animations:^{
-            self.myURLTextField.frame = CGRectMake(20, -30, 280, 30);
-            self.titleLabel.frame = CGRectMake(20, -51, 280, 21);
-            self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            self.headerView.frame = CGRectMake(0, -96, 320, 96);
+            self.navView.frame = CGRectMake(20, self.view.frame.size.height + 30, 280, 30);
+            self.myWebView.frame = CGRectMake(0, 20, self.view.frame.size.width, (self.view.frame.size.height - 20));
         }];
     }
 }
