@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 @property (nonatomic, assign) CGFloat lastContentOffset;
 @property (nonatomic, assign) ScrollDirection scrollDirection;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *pageLoadIndicatorView;
 
 @end
 
@@ -30,7 +31,7 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 {
     [super viewDidLoad];
     [self.myWebView.scrollView setDelegate:self];
-	// Do any additional setup after loading the view, typically from a nib.
+	
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,7 +43,11 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@",[textField text]];
+    NSString *urlString = [textField text];
+    if ([[textField text]rangeOfString:@"http://"].location == NSNotFound) {
+       urlString = [NSString stringWithFormat:@"http://%@",[textField text]];
+    }
+    
     NSURL *url = [[NSURL alloc]initWithString:urlString];
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
     [self.myWebView loadRequest:request];
@@ -81,36 +86,26 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
     }
 }
 
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [self.pageLoadIndicatorView startAnimating];
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.titleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    if ([webView canGoBack]){
-        self.backButton.enabled = YES;
-    } else {
-        self.backButton.enabled = NO;
+    self.backButton.enabled = [webView canGoBack];
+    self.forwardButton.enabled = [webView canGoForward];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self.pageLoadIndicatorView stopAnimating];
 
-    }
-    
-    if ([webView canGoForward]) {
-        self.forwardButton.enabled = YES;
-    } else {
-        self.forwardButton.enabled = NO;
-    }
+   
 }
 
-#pragma mark UIWebView controllers
-- (IBAction)onBackButtonPressed:(id)sender {
-    [self.myWebView goBack];
-}
-- (IBAction)onForwardButtonPressed:(id)sender {
-    [self.myWebView goForward];
-}
-- (IBAction)onStopButtonPressed:(id)sender {
-    [self.myWebView stopLoading];
-}
-- (IBAction)onReloadButtonPressed:(id)sender {
-    [self.myWebView reload];
-}
+
+
+
 - (IBAction)onPlusButtonPressed:(id)sender {
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Comming Soon" message:@"Amazing new feature" delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
     [av show];

@@ -44,7 +44,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="onBackButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dSs-yu-mGs"/>
+                                            <action selector="goBack" destination="Dbi-I3-eJY" eventType="touchUpInside" id="zt4-nw-e5W"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWl-aI-eHs">
@@ -54,7 +54,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="onForwardButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n1x-0G-fOA"/>
+                                            <action selector="goForward" destination="Dbi-I3-eJY" eventType="touchUpInside" id="Pej-IO-a5Y"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZ8-Je-GEX">
@@ -64,7 +64,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="onStopButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Tv2-ht-EbX"/>
+                                            <action selector="stopLoading" destination="Dbi-I3-eJY" eventType="touchUpInside" id="QJO-7S-zJ6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yid-Jo-N8J">
@@ -74,7 +74,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="onReloadButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="YhZ-0R-K7O"/>
+                                            <action selector="reload" destination="Dbi-I3-eJY" eventType="touchUpInside" id="RH8-EG-MgJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4M-qT-yjx">
@@ -97,6 +97,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wm7-Lc-Och">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -105,27 +109,11 @@
                         <outlet property="forwardButton" destination="gWl-aI-eHs" id="oBr-5x-GGU"/>
                         <outlet property="myURLTextField" destination="B6j-AF-K6h" id="ctK-1I-a5o"/>
                         <outlet property="myWebView" destination="Dbi-I3-eJY" id="wxg-3t-Cjd"/>
+                        <outlet property="pageLoadIndicatorView" destination="wm7-Lc-Och" id="bYy-yS-UF1"/>
                         <outlet property="titleLabel" destination="pzb-8P-W3i" id="M6m-vz-DkK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="szZ-j2-E4F">
-            <objects>
-                <viewController id="OeE-7N-PKU" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hVQ-Ew-NKK"/>
-                        <viewControllerLayoutGuide type="bottom" id="Xdx-hY-UOl"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="i8B-MH-Xfe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6FQ-Ce-wGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
