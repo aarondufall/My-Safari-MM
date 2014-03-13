@@ -76,13 +76,17 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (self.scrollDirection == ScrollDirectionDown){
-        self.myURLTextField.hidden = NO;
-        self.titleLabel.hidden = NO;
-        self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 58);
+        [UIView animateWithDuration:0.4 animations:^{
+            self.myURLTextField.frame = CGRectMake(20, 50, 280, 30);
+            self.titleLabel.frame = CGRectMake(20, 28, 280, 21);
+            self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 58);
+        }];
     } else if (self.scrollDirection == ScrollDirectionUp){
-        self.myURLTextField.hidden = YES;
-        self.titleLabel.hidden = YES;
-        self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [UIView animateWithDuration:0.4 animations:^{
+            self.myURLTextField.frame = CGRectMake(20, -30, 280, 30);
+            self.titleLabel.frame = CGRectMake(20, -51, 280, 21);
+            self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        }];
     }
 }
 
