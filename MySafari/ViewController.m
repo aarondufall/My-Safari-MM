@@ -76,16 +76,18 @@ typedef NS_ENUM(NSInteger, ScrollDirection){
     self.lastContentOffset = scrollView.contentOffset.y;
 }
 
+
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (self.scrollDirection == ScrollDirectionDown){
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             self.headerView.frame = CGRectMake(0, 0, 320, 96);
             self.navView.frame = CGRectMake(0, self.view.frame.size.height - 60, 320, 30);
-            self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 154);
+            self.myWebView.frame = CGRectMake(0, 96, self.view.frame.size.width, self.view.frame.size.height - 156);
         }];
     } else if (self.scrollDirection == ScrollDirectionUp){
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             self.headerView.frame = CGRectMake(0, -96, 320, 96);
             self.navView.frame = CGRectMake(0, self.view.frame.size.height + 60, 320, 60);
             self.myWebView.frame = CGRectMake(0, 20, self.view.frame.size.width, (self.view.frame.size.height - 20));
